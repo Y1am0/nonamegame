@@ -7,12 +7,13 @@ public class PlayerMovement : MonoBehaviour
     public int maxJumps = 2;
     public bool grounded;
 
+    private float moveInput;
     private Rigidbody2D rb;
     private Animator anim;
     private int jumpCount;
     private LadderMovement ladderMovement;
 
-    public bool IsJumping { get; private set; } // Expose jumping state
+    public bool IsJumping { get; private set; } 
 
     void Start()
     {
@@ -30,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleMovement()
     {
-        float moveInput = Input.GetAxisRaw("Horizontal");
+        moveInput = UserInput.instance.moveInput.x;
         rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
         FlipSprite(moveInput);
     }
